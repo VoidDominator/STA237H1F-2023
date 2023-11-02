@@ -103,8 +103,8 @@ Type your answer to 1a here: $\Omega$ = {1, 2, 3, 4, 5, 6}
 **(b)** (3 marks) Write R code to simulate rolling *one* fair six-sided die *once* and type your simulated outcome below the R code chunk. Remember to set the seed with your student number at the top of your R code chunk.
 ```{r}
 # Type R code for your answer to 1b in this section 
-dice_outcomes <- 1:6
 set.seed(1008866817)
+dice_outcomes <- 1:6
 sample(dice_outcomes, 1)
 ```
 Type your simulated outcome for 1b: 5
@@ -116,8 +116,8 @@ Simulating more rolls of a *one* fair six-sided die.
 **(a)** (3 marks) Write R code to simulate rolling *one* fair six-sided die *1000 times* and store your results in a R object called `rolls`. Then, estimate the probability of rolling a *2* on one roll of a fair six-sided die based on your simulated results. Remember to set the seed with your student number at the top of your R code chunk.
 ```{r}
 # Type R code for your answer to 2a in this section 
-dice_outcomes <- 1:6
 set.seed(1008866817)
+dice_outcomes <- 1:6
 rolls <- sample(dice_outcomes, 1000, replace = TRUE)
 mean(rolls == 2)
 ```
@@ -140,9 +140,9 @@ Type your answer to 3a here: $P(2)=1/(0.4+1\times5)=1/5.4=0.1852$
 Write R code to simulate rolling this weighted six-sided die *5000 times* and estimate the probability of rolling a *2* on one roll based on your simulated results. Remember to set the seed with your student number at the top of your R code chunk. [Hint: Copy and paste the code you wrote for question 2a; then modify accordingly. Note you will need to modify an argument in `sample()` - if you type `help(sample)` at the `>` prompt in the R Console on the bottom left RStudio window and hit enter, help documentation on `sample()` will open in the Help tab on the bottom right window.]
 ```{r}
 # Type R code for your answer to 3b in this section 
+set.seed(1008866817)
 dice_outcomes <- 1:6
 dice_prob <- c(0.4, 1, 1, 1, 1, 1)
-set.seed(1008866817)
 rolls <- sample(dice_outcomes, 5000, replace = TRUE, prob = dice_prob)
 mean(rolls == 2)
 ```
@@ -159,6 +159,7 @@ Type your answer to 3c here: My estimation of rolling 2 is close to the theoreti
 Conditional probabilities can be estimated via simulation as well. For example, consider flipping a fair coin *3* times. Let event $A=\mbox{flip at least one head}$, and event $B=\mbox{flip exactly two heads}$, and suppose we would like to estimate $P(B|A)$. The following code simulates $1000$ repetitions of this experiment and estimates the probability of $P(B|A)$. Try running it and compare it to the theoretical value of $P(B|A)$.
 
 ```{r}
+set.seed(1008866817)
 reps <- 1000
 num_heads <- numeric(reps)          # initializes vector to store number of heads for all reps
 for (i in 1:reps) {               # for loop simulates the experiment 'reps' times
@@ -207,28 +208,6 @@ for (i in 1:reps) {
   }
 }
 nDinC / nC
-
-# an unsuccessful attempt
-# dice_outcomes <- 1:6
-# reps <- 5000
-# dots <- numeric(reps)
-# for (i in 1:reps) {
-#   temp_flips <- sample(dice_outcomes, 2, replace = TRUE)
-#   dots[i] <- temp_flips
-# }
-#
-# nC <- 0
-# nDinC <- 0
-# for (i in 1:reps) {
-#   if ((dots[i][0] == 1 & dots[i][1] != 1) | (dots[i][0] != 1 & dots[i][1] == 1)) {
-#     nC <- nC + 1
-#     if (sum(dots[i]) < 6) {
-#       nDinC <- nDinC + 1
-#     }
-#   }
-# }
-# nDinC / nC
-
 ```
 Estimate of $P(D|C)$: 0.5983322
 
@@ -261,7 +240,6 @@ Consider the digits 1, 2, 3, 4, 5, and 6.
 **(a)** (2 marks) i. Use R to compute the number of possible rearrangements of these *6 digits*. Then, ii. use R code to simulate one repetition of this experiment. Remember to set the seed with your student number before each use of the `sample()` function.
 ```{r}
 # 5ai. count
-# choose(6,6)
 factorial(6)
 
 # 5aii. simulate
@@ -286,15 +264,15 @@ sample(digits, 3, replace = FALSE)
 
 ```{r}
 # 5ci. count
-# choose(6, 2) # without replacement
 6^2 # with replacement
+# choose(6, 2) # without replacement (Alternative)
 
 # 5cii. simulate
 digits <- 1:6
-# set.seed(1008866817)
-# sample(digits, 2, replace = FALSE) # without replacement
 set.seed(1008866817)
 sample(digits, 2, replace = TRUE) # with replacement
+# set.seed(1008866817)
+# sample(digits, 2, replace = FALSE) # without replacement (Alternative)
 ```
 
 
